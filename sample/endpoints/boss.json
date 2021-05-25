@@ -6,6 +6,6 @@
 	"mainsrc": "./",
 	"projects": [],
 	"dependencies": {
-		"https://github.com/alepmedeiros/woocommerce4d": ">0.0.0"
+		"https://github.com/alepmedeiros/woocommerce4d": "^1.0.0"
 	}
 }

@@ -1,6 +1,6 @@
 {
-	"hash": "d41d8cd98f00b204e9800998ecf8427e",
-	"updated": "2021-05-25T15:51:31.6994608-03:00",
+	"hash": "233b07dca6c481071445c14ab9a60fa0",
+	"updated": "2021-05-25T16:12:46.2106902-03:00",
 	"installedModules": {
 		"github.com/viniciussanchez/dataset-serialize": {
 			"name": "dataset-serialize",
@@ -12,8 +12,8 @@
 		},
 		"https://github.com/alepmedeiros/woocommerce4d": {
 			"name": "woocommerce4d",
-			"version": "master",
-			"hash": "890ffca1c8d717dba77dff3dd5912d0b",
+			"version": "1.0.0",
+			"hash": "d0d9f39f9686b80a5cd17ff862ea1ed9",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

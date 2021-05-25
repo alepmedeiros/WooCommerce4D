@@ -24,6 +24,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    procedure FormCreate(Sender: TObject);
   private
     FWooCommerce : iWooCommerce4D;
   public
@@ -36,5 +37,15 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FWooCommerce := TWooCommerce4D.New;
+  FWooCommerce
+    .Config
+      .Url('https://loja.sylasfilho.com.br')
+      .ConsumerKey('ck_a8839cc4d4482e79be334088c84706a380ee20b7')
+      .ConsumerSecret('cs_9a31395976b6b9d41aac177ef48b5f7be00f73e6');
+end;
 
 end.

@@ -15,5 +15,11 @@
     <Transaction>2021/05/25 16:04:08.421,=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\src\services\WooCommerce4D.Services.HttpClient.pas</Transaction>
     <Transaction>2021/05/25 16:04:08.497,=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\src\services\WooCommerce4D.Services.HttpClientParams.pas</Transaction>
     <Transaction>2021/05/25 16:04:08.545,=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\src\services\WooCommerce4D.Services.HttpMethod.pas</Transaction>
+    <Transaction>2021/05/25 16:11:45.107,=bindengine.dcp</Transaction>
+    <Transaction>2021/05/25 16:11:45.171,=dbrtl.dcp</Transaction>
+    <Transaction>2021/05/25 16:11:45.207,=FireDAC.dcp</Transaction>
+    <Transaction>2021/05/25 16:11:45.281,=FireDACCommonDriver.dcp</Transaction>
+    <Transaction>2021/05/25 16:11:45.314,=FireDACCommon.dcp</Transaction>
+    <Transaction>2021/05/25 16:11:45.374,=bindcomp.dcp</Transaction>
   </Transactions>
 </BorlandProject>

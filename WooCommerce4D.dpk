@@ -28,7 +28,13 @@ package WooCommerce4D;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  bindengine,
+  dbrtl,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  bindcomp;
 
 contains
   WooCommerce4D.oAuth.Interfaces in 'src\oauth\WooCommerce4D.oAuth.Interfaces.pas',
