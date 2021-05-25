@@ -1,0 +1,35 @@
+unit WooCommerce4D.oAuth.oAuthConfig;
+
+interface
+
+uses
+  WooCommerce4D.oAuth.Interfaces;
+
+type
+  ToAuthConfig = class(TInterfacedObject, iOAuthConfig)
+    private
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iOAuthConfig;
+  end;
+
+implementation
+
+constructor ToAuthConfig.Create;
+begin
+
+end;
+
+destructor ToAuthConfig.Destroy;
+begin
+
+  inherited;
+end;
+
+class function ToAuthConfig.New : iOAuthConfig;
+begin
+  Result := Self.Create;
+end;
+
+end.

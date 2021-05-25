@@ -1,0 +1,23 @@
+unit WooCommerce4D.Services.HttpClient;
+
+interface
+
+uses
+  Data.DB,
+  System.Generics.Collections;
+
+type
+  iHttpClient = interface
+    function Url(Value : String) : iHttpClient;
+    function Get : iHttpClient;
+    function GetAll : iHttpClient;
+    function Post : iHttpClient;
+    function Put : iHttpClient;
+    function Delete : iHttpClient;
+    function DataSet(Value : TDataSet) : iHttpClient;
+    function Content : String;
+  end;
+
+implementation
+
+end.

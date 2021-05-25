@@ -1,0 +1,7 @@
+unit WooCommerce4D.Services.HttpClientParams;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,201 @@
+unit WooCommerce4D.Services.HttpClientParams;
+
+interface
+
+uses
+  WooCommerce4D.Services.HttpClient;
+
+type
+  THttpClientParams<T : IInterface> = class(TInterfacedObject, iParams<T>)
+    private
+      [weak]
+      FParent : T;
+      FContext : String;
+      FPage : Integer;
+      FPerPage : Integer;
+      FSearch : String;
+      FAfter : String;
+      FBefore : String;
+      FExclude : ListID;
+      FInclude : ListID;
+      FOffset : Integer;
+      FOrder : String;
+      FOrderBy : String;
+      FCode : String;
+    public
+      constructor Create(Parent : T);
+      destructor Destroy; override;
+      class function New(Parent : T) : iParams<T>;
+      function Context(Value : String) : iParams<T>; overload;
+      function Context : String; overload;
+      function Page(Value : Integer) : iParams<T>; overload;
+      function Page : Integer; overload;
+      function PerPage(Value : Integer) : iParams<T>; overload;
+      function PerPage : Integer; overload;
+      function Search(Value : String) : iParams<T>; overload;
+      function Search : String; overload;
+      function After(Value : String) : iParams<T>; overload;
+      function After : String; overload;
+      function Before(Value : String) : iParams<T>; overload;
+      function Before : String; overload;
+      function Exclude(Value : ListID) : iParams<T>; overload;
+      function Exclude : ListID; overload;
+      function Include(Value : ListID) : iParams<T>; overload;
+      function Include : ListID; overload;
+      function Offset(Value : Integer) : iParams<T>; overload;
+      function Offset : Integer; overload;
+      function Order(Value : String) : iParams<T>; overload;
+      function Order : String; overload;
+      function OrderBy(Value : String) : iParams<T>; overload;
+      function OrderBy : String; overload;
+      function Code(Value : String) : iParams<T>; overload;
+      function Code : String; overload;
+      function &End : T;
+  public
+    constructor Create(Parent: T);
+  end;
+
+implementation
+
+function THttpClientParams<T>.After: String;
+begin
+
+end;
+
+function THttpClientParams<T>.After(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Before: String;
+begin
+
+end;
+
+function THttpClientParams<T>.Before(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Code(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Code: String;
+begin
+
+end;
+
+function THttpClientParams<T>.Context(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Context: String;
+begin
+
+end;
+
+function THttpClientParams<T>.&End: T;
+begin
+
+end;
+
+constructor THttpClientParams<T>.Create(Parent : T);
+begin
+  FParent := Parent;
+end;
+
+destructor THttpClientParams<T>.Destroy;
+begin
+
+  inherited;
+end;
+
+function THttpClientParams<T>.Exclude(Value: ListID): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Exclude: ListID;
+begin
+
+end;
+
+function THttpClientParams<T>.Include(Value: ListID): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Include: ListID;
+begin
+
+end;
+
+class function THttpClientParams<T>.New(Parent : T) : iParams<T>;
+begin
+  Result := Self.Create(Parent);
+end;
+
+function THttpClientParams<T>.Offset(Value: Integer): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Offset: Integer;
+begin
+
+end;
+
+function THttpClientParams<T>.Order: String;
+begin
+
+end;
+
+function THttpClientParams<T>.OrderBy(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Order(Value: String): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.OrderBy: String;
+begin
+
+end;
+
+function THttpClientParams<T>.Page(Value: Integer): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Page: Integer;
+begin
+
+end;
+
+function THttpClientParams<T>.PerPage: Integer;
+begin
+
+end;
+
+function THttpClientParams<T>.PerPage(Value: Integer): iParams<T>;
+begin
+
+end;
+
+function THttpClientParams<T>.Search: String;
+begin
+
+end;
+
+function THttpClientParams<T>.Search(Value: String): iParams<T>;
+begin
+
+end;
+
+end.

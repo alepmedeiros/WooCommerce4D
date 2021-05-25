@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/05/25 15:27:32.000.982,=C:\Users\Criacao\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/05/25 15:29:45.000.397,C:\Users\Criacao\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\sample\posts\Unit1.pas</Transaction>
+    <Transaction>2021/05/25 15:29:45.000.397,C:\Users\Criacao\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\sample\posts\Unit1.dfm</Transaction>
+    <Transaction>2021/05/25 15:29:59.000.934,C:\Users\Criacao\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Criacao\Documents\GitHub\WooCommerce4D\sample\posts\EndPoints.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

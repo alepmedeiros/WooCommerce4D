@@ -1,0 +1,101 @@
+unit WooCommerce4D.Services.DefaultHttpClient;
+
+interface
+
+uses
+  WooCommerce4D.Services.HttpClient,
+  RestRequest4D,
+  Data.DB;
+
+type
+  TDefaultHttpClient = class(TInterfacedObject, iHttpClient)
+    private
+      FParams : iParams<iHttpClient>;
+      FRequest  : IRequest;
+      FResponse : IResponse;
+      FUrl : String;
+
+      const
+        CONTENT_TYPE = 'Content-Type';
+        APPLICATION_JSON = 'application/json';
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New : iHttpClient;
+      function Url(Value : String) : iHttpClient;
+      function Params : iParams<iHttpClient>;
+      function Get : iHttpClient;
+      function GetAll : iHttpClient;
+      function Post : iHttpClient;
+      function Put : iHttpClient;
+      function Delete : iHttpClient;
+      function DataSet(Value : TDataSet) : iHttpClient;
+      function Content : String;
+  end;
+
+implementation
+
+function TDefaultHttpClient.Content: String;
+begin
+  Result := FResponse.Content;
+end;
+
+constructor TDefaultHttpClient.Create;
+begin
+  FRequest := TRequest.New;
+end;
+
+function TDefaultHttpClient.DataSet(Value: TDataSet): iHttpClient;
+begin
+  Result := Self;
+  FRequest.DataSetAdapter(Value);
+end;
+
+function TDefaultHttpClient.Delete: iHttpClient;
+begin
+  Result := Self;
+end;
+
+destructor TDefaultHttpClient.Destroy;
+begin
+
+  inherited;
+end;
+
+function TDefaultHttpClient.Get: iHttpClient;
+begin
+  Result := Self;
+  FRequest.BaseURL()
+end;
+
+function TDefaultHttpClient.GetAll: iHttpClient;
+begin
+
+end;
+
+class function TDefaultHttpClient.New : iHttpClient;
+begin
+  Result := Self.Create;
+end;
+
+function TDefaultHttpClient.Params: iParams<iHttpClient>;
+begin
+
+end;
+
+function TDefaultHttpClient.Post: iHttpClient;
+begin
+
+end;
+
+function TDefaultHttpClient.Put: iHttpClient;
+begin
+
+end;
+
+function TDefaultHttpClient.Url(Value: String): iHttpClient;
+begin
+
+end;
+
+end.

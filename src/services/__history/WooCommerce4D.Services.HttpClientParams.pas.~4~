@@ -1,0 +1,211 @@
+unit WooCommerce4D.Services.HttpClientParams;
+
+interface
+
+uses
+  WooCommerce4D.Services.HttpClient;
+
+type
+  THttpClientParams<T : IInterface> = class(TInterfacedObject, iParams<T>)
+    private
+      [weak]
+      FParent : T;
+      FContext : String;
+      FPage : Integer;
+      FPerPage : Integer;
+      FSearch : String;
+      FAfter : String;
+      FBefore : String;
+      FExclude : ListID;
+      FInclude : ListID;
+      FOffset : Integer;
+      FOrder : String;
+      FOrderBy : String;
+      FCode : String;
+    public
+      constructor Create(Parent : T);
+      destructor Destroy; override;
+      class function New(Parent : T) : iParams<T>;
+      function Context(Value : String) : iParams<T>; overload;
+      function Context : String; overload;
+      function Page(Value : Integer) : iParams<T>; overload;
+      function Page : Integer; overload;
+      function PerPage(Value : Integer) : iParams<T>; overload;
+      function PerPage : Integer; overload;
+      function Search(Value : String) : iParams<T>; overload;
+      function Search : String; overload;
+      function After(Value : String) : iParams<T>; overload;
+      function After : String; overload;
+      function Before(Value : String) : iParams<T>; overload;
+      function Before : String; overload;
+      function Exclude(Value : ListID) : iParams<T>; overload;
+      function Exclude : ListID; overload;
+      function Include(Value : ListID) : iParams<T>; overload;
+      function Include : ListID; overload;
+      function Offset(Value : Integer) : iParams<T>; overload;
+      function Offset : Integer; overload;
+      function Order(Value : String) : iParams<T>; overload;
+      function Order : String; overload;
+      function OrderBy(Value : String) : iParams<T>; overload;
+      function OrderBy : String; overload;
+      function Code(Value : String) : iParams<T>; overload;
+      function Code : String; overload;
+      function &End : T;
+  end;
+
+implementation
+
+function THttpClientParams<T>.After: String;
+begin
+  Result := FAfter;
+end;
+
+function THttpClientParams<T>.After(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FAfter := Value;
+end;
+
+function THttpClientParams<T>.Before: String;
+begin
+  Result := FBefore;
+end;
+
+function THttpClientParams<T>.Before(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FBefore := Value;
+end;
+
+function THttpClientParams<T>.Code(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FCode := Value;
+end;
+
+function THttpClientParams<T>.Code: String;
+begin
+  Result := FCode;
+end;
+
+function THttpClientParams<T>.Context(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FContext := Value;
+end;
+
+function THttpClientParams<T>.Context: String;
+begin
+  Result := FContext;
+end;
+
+function THttpClientParams<T>.&End: T;
+begin
+  Result := FParent;
+end;
+
+constructor THttpClientParams<T>.Create(Parent : T);
+begin
+  FParent := Parent;
+end;
+
+destructor THttpClientParams<T>.Destroy;
+begin
+
+  inherited;
+end;
+
+function THttpClientParams<T>.Exclude(Value: ListID): iParams<T>;
+begin
+  Result := Self;
+  FExclude := Value;
+end;
+
+function THttpClientParams<T>.Exclude: ListID;
+begin
+  Result := FExclude;
+end;
+
+function THttpClientParams<T>.Include(Value: ListID): iParams<T>;
+begin
+  Result := Self;
+  FInclude := Value;
+end;
+
+function THttpClientParams<T>.Include: ListID;
+begin
+  Result := FInclude;
+end;
+
+class function THttpClientParams<T>.New(Parent : T) : iParams<T>;
+begin
+  Result := Self.Create(Parent);
+end;
+
+function THttpClientParams<T>.Offset(Value: Integer): iParams<T>;
+begin
+  Result := Self;
+  FOffset := Value;
+end;
+
+function THttpClientParams<T>.Offset: Integer;
+begin
+  Result := FOffset;
+end;
+
+function THttpClientParams<T>.Order: String;
+begin
+  Result := FOrder;
+end;
+
+function THttpClientParams<T>.OrderBy(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FOrderby := Value;
+end;
+
+function THttpClientParams<T>.Order(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FOrder := Value;
+end;
+
+function THttpClientParams<T>.OrderBy: String;
+begin
+  Result := FOrder;
+end;
+
+function THttpClientParams<T>.Page(Value: Integer): iParams<T>;
+begin
+  Result := Self;
+  FPage := Value;
+end;
+
+function THttpClientParams<T>.Page: Integer;
+begin
+  Result := FPage;
+end;
+
+function THttpClientParams<T>.PerPage: Integer;
+begin
+  Result := FPerPage;
+end;
+
+function THttpClientParams<T>.PerPage(Value: Integer): iParams<T>;
+begin
+  Result := Self;
+  FPerPage := Value;
+end;
+
+function THttpClientParams<T>.Search: String;
+begin
+  Result := FSearch;
+end;
+
+function THttpClientParams<T>.Search(Value: String): iParams<T>;
+begin
+  Result := Self;
+  FSearch := Value;
+end;
+
+end.
