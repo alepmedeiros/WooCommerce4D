@@ -1,0 +1,51 @@
+package WooCormmerce4D;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  dbrtl,
+  bindengine,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  bindcomp;
+
+contains
+  WooCommerce4D.Services.HttpClient in 'src\services\WooCommerce4D.Services.HttpClient.pas',
+  WooCommerce4D.Services.HttpMethod in 'src\services\WooCommerce4D.Services.HttpMethod.pas',
+  WooCommerce4D.Services.EndPointBaseType in 'src\services\WooCommerce4D.Services.EndPointBaseType.pas',
+  WooCommerce4D.Services.ApiVersionType in 'src\services\WooCommerce4D.Services.ApiVersionType.pas',
+  WooCommerce4D.Services.DefaultHttpClient in 'src\services\WooCommerce4D.Services.DefaultHttpClient.pas',
+  WooCommerce4D.Services.HttpClientParams in 'src\services\WooCommerce4D.Services.HttpClientParams.pas',
+  WooCommerce4D.oAuth.oAuthConfig in 'src\oauth\WooCommerce4D.oAuth.oAuthConfig.pas',
+  WooCommerce4D.oAuth.Interfaces in 'src\oauth\WooCommerce4D.oAuth.Interfaces.pas',
+  WooCommerce4D in 'src\WooCommerce4D.pas',
+  WooCommerce4D.Resources.Interfaces in 'src\WooCommerce4D.Resources.Interfaces.pas';
+
+end.
