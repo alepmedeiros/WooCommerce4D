@@ -3,6 +3,7 @@ unit WooCommerce4D;
 interface
 
 uses
+  WooCommerce4D.Resources.Interfaces,
   WooCommerce4D.oAuth.oAuthConfig,
   WooCommerce4D.oAuth.Interfaces;
 
@@ -16,7 +17,7 @@ type
     public
       constructor Create;
       destructor Destroy; override;
-      class function New : iWooCommerce4D;
+      class function New : iWooCiWooCommerce4Dommerce;
       function Config : iOAuthConfig;
   end;
 
