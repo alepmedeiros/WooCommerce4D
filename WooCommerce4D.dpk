@@ -28,6 +28,26 @@ package WooCommerce4D;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  bindengine,
+  dbrtl,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  bindcomp;
+
+contains
+  WooCommerce4D in 'src\WooCommerce4D.pas',
+  WooCommerce4D.Interfaces in 'src\WooCommerce4D.Interfaces.pas',
+  WooCommerce4D.HttpClient.Interfaces in 'src\httpClient\WooCommerce4D.HttpClient.Interfaces.pas',
+  WooCommerce4D.HttpClient.WooCommerceAPI in 'src\httpClient\WooCommerce4D.HttpClient.WooCommerceAPI.pas',
+  WooCommerce4D.OAuth.Interfaces in 'src\oauth\WooCommerce4D.OAuth.Interfaces.pas',
+  WooCommerce4D.OAuth.OAuthConfig in 'src\oauth\WooCommerce4D.OAuth.OAuthConfig.pas',
+  WooCommerce4D.OAuth.OAuthHeader in 'src\oauth\WooCommerce4D.OAuth.OAuthHeader.pas',
+  WooCommerce4D.OAuth.SpecialSymbol in 'src\oauth\WooCommerce4D.OAuth.SpecialSymbol.pas',
+  WooCommerce4D.HttpClient.HttpMethod in 'src\httpClient\WooCommerce4D.HttpClient.HttpMethod.pas',
+  WooCommerce4D.HttpClient.EndpointBaseType in 'src\httpClient\WooCommerce4D.HttpClient.EndpointBaseType.pas',
+  WooCommerce4D.HttpClient.DefaultHttpClient in 'src\httpClient\WooCommerce4D.HttpClient.DefaultHttpClient.pas',
+  WooCommerce4D.HttpClient.ApiVersionType in 'src\httpClient\WooCommerce4D.HttpClient.ApiVersionType.pas';
 
 end.
