@@ -5,12 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, WooCommerce4D,
-  WooCommerce4D.Interfaces, WooCommerce4D.HttpClient.ApiVersionType;
+  WooCommerce4D.Interfaces, WooCommerce4D.Types;
 
 type
   TForm1 = class(TForm)
     Button1: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,6 +24,13 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  Fwoocommerce
+    .Resources
+    .GetAll(TEndpointBase)
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
