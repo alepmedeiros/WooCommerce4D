@@ -4,7 +4,8 @@ interface
 
 uses
   System.Generics.Collections,
-  Data.DB;
+  Data.DB,
+  WooCommerce4D.Types;
 
 type
   iHttpClient = interface
@@ -21,7 +22,8 @@ type
   iWooCommerce = interface
     function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
     function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-    function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce;
+    function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
+    function GetAll(endpointBase : TEndpointBaseType; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
     function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
     function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
     function Batch(endpointBase :

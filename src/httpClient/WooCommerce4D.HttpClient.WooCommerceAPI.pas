@@ -32,7 +32,8 @@ type
       class function New(Parent : iOAuthConfig) : iWooCommerce;
       function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
       function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-      function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce;
+      function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
+      function GetAll(endpointBase : TEndpointBaseType; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
       function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
       function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
       function Batch(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
@@ -89,6 +90,16 @@ begin
   Furl := Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FApiVersion, endpointBase, id]);
 
   FHttpClient.Get(Furl);
+end;
+
+function TWooCommerceAPI.GetAll(endpointBase: TEndpointBaseType;
+  Params: TDictionary<String, String>): iWooCommerce;
+begin
+  Result := Self;
+
+  FUrl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase.GetValue]);
+
+  FHttpClient.Get(FUrl);
 end;
 
 function TWooCommerceAPI.GetAll(endpointBase: String;

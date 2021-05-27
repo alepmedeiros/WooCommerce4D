@@ -124,9 +124,39 @@
         <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.WooCommerceAPI.pas"/>
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.Interfaces.pas"/>
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.OAuthConfig.pas"/>
-        <DCCReference Include="src\oauth\WooCommerce4D.OAuth.OAuthHeader.pas"/>
         <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.DefaultHttpClient.pas"/>
         <DCCReference Include="src\utils\WooCommerce4D.Types.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Interfaces.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Coupons.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.MetaData.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Billing.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Customer.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.LinesItems.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Orders.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Shipping.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ShippingLines.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.FreeLines.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.CouponsLines.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.OrdersNotes.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Refunds.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Products.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Downloads.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Dimensions.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Categories.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Tags.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Images.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Attributes.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.DefaultAttributes.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductVariations.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductsAttributes.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductAttributesTerms.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductCategories.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductShippingClasses.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductTags.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.ProductReviews.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.TaxRates.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.TaxClasses.pas"/>
+        <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.WebHooks.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -164,7 +194,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\Public\Documents\Embarcadero\Studio\21.0\Bpl\WooCommerce4D.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\..\..\..\..\..\Public\Documents\Embarcadero\Studio\21.0\Bpl\WooCommerce4D.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>WooCommerce4D.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

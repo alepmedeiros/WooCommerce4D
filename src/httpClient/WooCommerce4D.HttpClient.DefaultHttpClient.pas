@@ -98,7 +98,7 @@ begin
   FContent :=
     FReq
       .BaseURL(Url)
-      .Get;
+      .Get.Content;
 end;
 
 class function TDefaultHttpClient.New : iHttpClient;

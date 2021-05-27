@@ -24,6 +24,7 @@ type
       function ConsumerSecret(Value : String) : iOAuthConfig; overload;
       function ConsumerSecret : String; overload;
       function Version(Value : String) : iOAuthConfig; overload;
+      function Version(Value : TApiVersionType) : iOAuthConfig; overload;
       function Version : String; overload;
   end;
 
@@ -76,6 +77,12 @@ end;
 function TOAuthConfig.Url: String;
 begin
   Result := FUrl;
+end;
+
+function TOAuthConfig.Version(Value: TApiVersionType): iOAuthConfig;
+begin
+ Result := Self;
+ FVersion := Value.ToString;
 end;
 
 function TOAuthConfig.Version: String;
