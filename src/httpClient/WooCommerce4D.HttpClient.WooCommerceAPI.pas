@@ -19,6 +19,7 @@ type
       FHttpClient : iHttpClient;
       FApiVersion : String;
       FUrl : String;
+    function Params(Value: TDictionary<String, String>): iWooCommerce;
 
       const
         API_URL_FORMAT = '%s/wp-json/wc/%s/%s';
@@ -31,7 +32,7 @@ type
       class function New(Parent : iOAuthConfig) : iWooCommerce;
       function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
       function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-      function GetAll(endpointBase : String; Params : TDictionary<String, String>) : iWooCommerce;
+      function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce;
       function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
       function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
       function Batch(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
@@ -45,6 +46,9 @@ constructor TWooCommerceAPI.Create(Parent : iOAuthConfig);
 begin
   FParent := Parent;
   FHttpClient := TDefaultHttpClient.New;
+
+  FHttpClient.Authentication(FParent.ConsumerKey, FParent.ConsumerSecret);
+
   FApiVersion := FParent.Version;
 end;
 
@@ -100,6 +104,12 @@ end;
 class function TWooCommerceAPI.New (Parent : iOAuthConfig) : iWooCommerce;
 begin
   Result := Self.Create(Parent);
+end;
+
+function TWooCommerceAPI.Params(
+  Value: TDictionary<String, String>): iWooCommerce;
+begin
+  Result := Self;
 end;
 
 function TWooCommerceAPI.Batch(endpointBase: String;

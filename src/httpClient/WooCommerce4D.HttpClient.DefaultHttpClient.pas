@@ -15,6 +15,8 @@ type
     private
       FReq : IRequest;
       FResp : IResponse;
+      FContent : String;
+
       const
         CONTENT_TYPE = 'Content-Type';
         APPLICATION_JSON = 'application/json';
@@ -22,6 +24,7 @@ type
       constructor Create;
       destructor Destroy; override;
       class function New : iHttpClient;
+      function Authentication(aUserName, aPassword : String) : ihttpClient;
       function Get(Url : String) : ihttpClient;
       function GetAll(Url : String) : ihttpClient;
       function Post(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
@@ -33,9 +36,16 @@ type
 
 implementation
 
+function TDefaultHttpClient.Authentication(aUserName,
+  aPassword: String): ihttpClient;
+begin
+  Result := Self;
+  FReq.BasicAuthentication(aUserName,aPassword);
+end;
+
 function TDefaultHttpClient.Content: String;
 begin
-  Result := FResp.Content;
+  Result := FContent;
 end;
 
 constructor TDefaultHttpClient.Create;
@@ -59,9 +69,10 @@ begin
   for I in Params.Keys do
     FReq.AddParam(i,params.Items[i]);
 
-  FReq
-    .BaseURL(Url)
-    .Delete;
+  FContent :=
+    FReq
+      .BaseURL(Url)
+      .Delete.Content;
 end;
 
 destructor TDefaultHttpClient.Destroy;
@@ -73,18 +84,21 @@ end;
 function TDefaultHttpClient.Get(Url: String): ihttpClient;
 begin
   Result := Self;
-  FReq
-    .BaseURL(Url)
-    .Get;
+
+  FContent :=
+    FReq
+      .BaseURL(Url)
+      .Get.Content;
 end;
 
 function TDefaultHttpClient.GetAll(Url: String): ihttpClient;
 begin
   Result := Self;
 
-  FReq
-    .BaseURL(Url)
-    .Get;
+  FContent :=
+    FReq
+      .BaseURL(Url)
+      .Get;
 end;
 
 class function TDefaultHttpClient.New : iHttpClient;
@@ -102,11 +116,12 @@ begin
   for I in Params.Keys do
     FReq.AddParam(I, Params.Items[I]);
 
-  FReq
-    .BaseURL(Url)
-    .AddHeader(CONTENT_TYPE,APPLICATION_JSON)
-    .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
-    .Post;
+  FContent :=
+    FReq
+      .BaseURL(Url)
+      .AddHeader(CONTENT_TYPE,APPLICATION_JSON)
+      .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
+      .Post.Content;
 end;
 
 function TDefaultHttpClient.Put(Url: String;
@@ -119,11 +134,12 @@ begin
   for I in Params.Keys do
     FReq.AddParam(I, Params.Items[I]);
 
-  FReq
-    .BaseURL(Url)
-    .AddHeader(CONTENT_TYPE, APPLICATION_JSON)
-    .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
-    .Put;
+  FContent :=
+    FReq
+      .BaseURL(Url)
+      .AddHeader(CONTENT_TYPE, APPLICATION_JSON)
+      .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
+      .Put.Content;
 end;
 
 end.

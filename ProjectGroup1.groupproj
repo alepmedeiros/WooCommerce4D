@@ -3,10 +3,10 @@
         <ProjectGuid>{F1831F3D-E521-40FA-9C94-1EA789401B7A}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="WooCommerce4D.dproj">
+        <Projects Include="sample\fwvcl\Project1.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="sample\fwvcl\Project1.dproj">
+        <Projects Include="WooCommerce4D.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,15 +17,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="WooCommerce4D">
-        <MSBuild Projects="WooCommerce4D.dproj"/>
-    </Target>
-    <Target Name="WooCommerce4D:Clean">
-        <MSBuild Projects="WooCommerce4D.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="WooCommerce4D:Make">
-        <MSBuild Projects="WooCommerce4D.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Project1">
         <MSBuild Projects="sample\fwvcl\Project1.dproj"/>
     </Target>
@@ -35,14 +26,23 @@
     <Target Name="Project1:Make">
         <MSBuild Projects="sample\fwvcl\Project1.dproj" Targets="Make"/>
     </Target>
+    <Target Name="WooCommerce4D">
+        <MSBuild Projects="WooCommerce4D.dproj"/>
+    </Target>
+    <Target Name="WooCommerce4D:Clean">
+        <MSBuild Projects="WooCommerce4D.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WooCommerce4D:Make">
+        <MSBuild Projects="WooCommerce4D.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="WooCommerce4D;Project1"/>
+        <CallTarget Targets="Project1;WooCommerce4D"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="WooCommerce4D:Clean;Project1:Clean"/>
+        <CallTarget Targets="Project1:Clean;WooCommerce4D:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="WooCommerce4D:Make;Project1:Make"/>
+        <CallTarget Targets="Project1:Make;WooCommerce4D:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

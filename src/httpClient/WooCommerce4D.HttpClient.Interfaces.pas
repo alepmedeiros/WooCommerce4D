@@ -8,6 +8,7 @@ uses
 
 type
   iHttpClient = interface
+    function Authentication(aUserName, aPassword : String) : ihttpClient;
     function Get(Url : String) : ihttpClient;
     function GetAll(Url : String) : ihttpClient;
     function Post(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
@@ -20,7 +21,7 @@ type
   iWooCommerce = interface
     function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
     function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-    function GetAll(endpointBase : String; Params : TDictionary<String, String>) : iWooCommerce;
+    function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce;
     function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
     function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
     function Batch(endpointBase :

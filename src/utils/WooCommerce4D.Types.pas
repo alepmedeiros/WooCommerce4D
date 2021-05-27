@@ -20,7 +20,7 @@ type
   end;
 
   TEndpointBaseTypeHelper = record helper for TEndpointBaseType
-    function GetValue(Value : Integer) : String;
+    function GetValue : String;
   end;
 
   THttpMethodHelper = record helper for THttpMethod
@@ -38,7 +38,7 @@ end;
 
 { TEndpointBaseTypeHelper }
 
-function TEndpointBaseTypeHelper.GetValue(Value: Integer): String;
+function TEndpointBaseTypeHelper.GetValue : String;
 begin
   case Integer(Self) of
     0 : Result := 'coupons';
