@@ -8,7 +8,8 @@ uses
   System.Generics.Collections,
   WooCommerce4D.HttpClient.DefaultHttpClient,
   System.SysUtils,
-  WooCommerce4D.HttpClient.ApiVersionType;
+  WooCommerce4D.Types,
+  Data.DB;
 
 type
   TWooCommerceAPI = class(TInterfacedObject, iWooCommerce)
@@ -17,6 +18,7 @@ type
       FParent : iOAuthConfig;
       FHttpClient : iHttpClient;
       FApiVersion : String;
+      FUrl : String;
 
       const
         API_URL_FORMAT = '%s/wp-json/wc/%s/%s';
@@ -33,6 +35,8 @@ type
       function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
       function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
       function Batch(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
+      function DataSet(Value : TDataSet) : iWooCommerce;
+      function Content : String;
   end;
 
 implementation
@@ -41,16 +45,25 @@ constructor TWooCommerceAPI.Create(Parent : iOAuthConfig);
 begin
   FParent := Parent;
   FHttpClient := TDefaultHttpClient.New;
-  FApiVersion := TApiVersionType.V3.ToString;
+  FApiVersion := FParent.Version;
+end;
+
+function TWooCommerceAPI.Content: String;
+begin
+  Result := FHttpClient.Content;
 end;
 
 function TWooCommerceAPI.&Create(endpointBase: String;
   Objects: TDictionary<String, TObject>): iWooCommerce;
-var
-  url : String;
 begin
   Result := Self;
-  url := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase]);
+  Furl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase]);
+end;
+
+function TWooCommerceAPI.DataSet(Value: TDataSet): iWooCommerce;
+begin
+  Result := Self;
+  FHttpClient.DataSet(Value);
 end;
 
 function TWooCommerceAPI.Delete(endpointBase: String;
@@ -68,12 +81,20 @@ end;
 function TWooCommerceAPI.Get(endpointBase: String; Id: Integer): iWooCommerce;
 begin
   Result := Self;
+
+  Furl := Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FApiVersion, endpointBase, id]);
+
+  FHttpClient.Get(Furl);
 end;
 
 function TWooCommerceAPI.GetAll(endpointBase: String;
   Params: TDictionary<String, String>): iWooCommerce;
 begin
   Result := Self;
+
+  FUrl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase]);
+
+  FHttpClient.Get(FUrl);
 end;
 
 class function TWooCommerceAPI.New (Parent : iOAuthConfig) : iWooCommerce;

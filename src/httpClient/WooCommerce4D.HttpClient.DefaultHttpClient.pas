@@ -7,13 +7,14 @@ uses
   RestRequest4D,
   JSON,
   REST.JSON,
-  System.Generics.Collections;
+  System.Generics.Collections,
+  Data.DB;
 
 type
   TDefaultHttpClient = class(TInterfacedObject, iHttpClient)
     private
-      FHttpClient : IRequest;
-
+      FReq : IRequest;
+      FResp : IResponse;
       const
         CONTENT_TYPE = 'Content-Type';
         APPLICATION_JSON = 'application/json';
@@ -26,13 +27,26 @@ type
       function Post(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
       function Put(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
       function Delete(Url : String; Params : TDictionary<String, String>)  : ihttpClient;
+      function DataSet(Value : TDataSet) : ihttpClient;
+      function Content : String;
   end;
 
 implementation
 
+function TDefaultHttpClient.Content: String;
+begin
+  Result := FResp.Content;
+end;
+
 constructor TDefaultHttpClient.Create;
 begin
-  FHttpClient := TRequest.New;
+  FReq := TRequest.New;
+end;
+
+function TDefaultHttpClient.DataSet(Value: TDataSet): ihttpClient;
+begin
+  Result := Self;
+  FReq.DataSetAdapter(Value);
 end;
 
 function TDefaultHttpClient.Delete(Url: String;
@@ -43,9 +57,9 @@ begin
   Result := Self;
 
   for I in Params.Keys do
-    FHttpClient.AddParam(i,params.Items[i]);
+    FReq.AddParam(i,params.Items[i]);
 
-  FHttpClient
+  FReq
     .BaseURL(Url)
     .Delete;
 end;
@@ -59,7 +73,7 @@ end;
 function TDefaultHttpClient.Get(Url: String): ihttpClient;
 begin
   Result := Self;
-  FHttpClient
+  FReq
     .BaseURL(Url)
     .Get;
 end;
@@ -68,7 +82,7 @@ function TDefaultHttpClient.GetAll(Url: String): ihttpClient;
 begin
   Result := Self;
 
-  FHttpClient
+  FReq
     .BaseURL(Url)
     .Get;
 end;
@@ -86,9 +100,9 @@ begin
   Result := Self;
 
   for I in Params.Keys do
-    FHttpClient.AddParam(I, Params.Items[I]);
+    FReq.AddParam(I, Params.Items[I]);
 
-  FHttpClient
+  FReq
     .BaseURL(Url)
     .AddHeader(CONTENT_TYPE,APPLICATION_JSON)
     .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
@@ -103,9 +117,9 @@ begin
   Result := Self;
 
   for I in Params.Keys do
-    FHttpClient.AddParam(I, Params.Items[I]);
+    FReq.AddParam(I, Params.Items[I]);
 
-  FHttpClient
+  FReq
     .BaseURL(Url)
     .AddHeader(CONTENT_TYPE, APPLICATION_JSON)
     .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)

@@ -3,7 +3,8 @@ unit WooCommerce4D.OAuth.OAuthConfig;
 interface
 
 uses
-  WooCommerce4D.OAuth.Interfaces;
+  WooCommerce4D.OAuth.Interfaces,
+  WooCommerce4D.Types;
 
 type
   TOAuthConfig = class(TInterfacedObject, iOAuthConfig)

@@ -67,7 +67,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>WooCommerce4D</SanitizedProjectName>
-        <DCC_UnitSearchPath>$(DCC_UnitSearchPath);modules\.dcp;modules\.dcu;modules;modules\dataset-serialize\src;modules\restrequest4delphi\src</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>modules\.dcp;modules\.dcu;modules;modules\dataset-serialize\src;modules\restrequest4delphi\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
@@ -125,11 +125,8 @@
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.Interfaces.pas"/>
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.OAuthConfig.pas"/>
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.OAuthHeader.pas"/>
-        <DCCReference Include="src\oauth\WooCommerce4D.OAuth.SpecialSymbol.pas"/>
-        <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.HttpMethod.pas"/>
-        <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.EndpointBaseType.pas"/>
         <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.DefaultHttpClient.pas"/>
-        <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.ApiVersionType.pas"/>
+        <DCCReference Include="src\utils\WooCommerce4D.Types.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
