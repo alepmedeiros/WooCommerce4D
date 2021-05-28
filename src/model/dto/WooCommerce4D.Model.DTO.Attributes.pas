@@ -29,7 +29,7 @@ implementation
 
 function TModelAttributesDTO<T>.&End: T;
 begin
-
+  Result := FParent;
 end;
 
 constructor TModelAttributesDTO<T>.Create(Parent : T);

@@ -8,7 +8,7 @@ uses
   JSON,
   REST.JSON,
   System.Generics.Collections,
-  Data.DB;
+  Data.DB, WooCommerce4D.Model.DTO.Interfaces;
 
 type
   TDefaultHttpClient = class(TInterfacedObject, iHttpClient)
@@ -24,14 +24,16 @@ type
       constructor Create;
       destructor Destroy; override;
       class function New : iHttpClient;
-      function Authentication(aUserName, aPassword : String) : ihttpClient;
-      function Get(Url : String) : ihttpClient;
-      function GetAll(Url : String) : ihttpClient;
-      function Post(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
-      function Put(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
-      function Delete(Url : String; Params : TDictionary<String, String>)  : ihttpClient;
-      function DataSet(Value : TDataSet) : ihttpClient;
-      function Content : String;
+        function Authentication(aUserName, aPassword : String) : ihttpClient;
+        function Get(Url : String) : ihttpClient;
+        function GetAll(Url : String) : ihttpClient;
+        function Post(Url : String) : ihttpClient;
+        function Put(Url : String) : ihttpClient;
+        function Delete(Url : String)  : ihttpClient;
+        function Params(aKey,aValue : String) : ihttpClient;
+        function Body(Value : iEntity) : ihttpClient;
+        function DataSet(Value : TDataSet) : ihttpClient;
+        function Content : String;
   end;
 
 implementation
@@ -41,6 +43,12 @@ function TDefaultHttpClient.Authentication(aUserName,
 begin
   Result := Self;
   FReq.BasicAuthentication(aUserName,aPassword);
+end;
+
+function TDefaultHttpClient.Body(Value: iEntity): ihttpClient;
+begin
+  Result := Self;
+  FReq.AddBody(Value.Content);
 end;
 
 function TDefaultHttpClient.Content: String;
@@ -59,15 +67,11 @@ begin
   FReq.DataSetAdapter(Value);
 end;
 
-function TDefaultHttpClient.Delete(Url: String;
-  Params: TDictionary<String, String>): ihttpClient;
+function TDefaultHttpClient.Delete(Url : String)  : ihttpClient;
 var
   I : String;
 begin
   Result := Self;
-
-  for I in Params.Keys do
-    FReq.AddParam(i,params.Items[i]);
 
   FContent :=
     FReq
@@ -81,7 +85,7 @@ begin
   inherited;
 end;
 
-function TDefaultHttpClient.Get(Url: String): ihttpClient;
+function TDefaultHttpClient.Get(Url : String) : ihttpClient;
 begin
   Result := Self;
 
@@ -91,7 +95,7 @@ begin
       .Get.Content;
 end;
 
-function TDefaultHttpClient.GetAll(Url: String): ihttpClient;
+function TDefaultHttpClient.GetAll(Url : String) : ihttpClient;
 begin
   Result := Self;
 
@@ -106,39 +110,35 @@ begin
   Result := Self.Create;
 end;
 
-function TDefaultHttpClient.Post(Url: String;
-  Params: TDictionary<String, String>; Objects: TObject): ihttpClient;
+function TDefaultHttpClient.Params(aKey, aValue: String): ihttpClient;
+begin
+  Result := Self;
+  FReq.AddParam(aKey, aValue);
+end;
+
+function TDefaultHttpClient.Post(Url : String) : ihttpClient;
 var
   I: String;
 begin
   Result := Self;
 
-  for I in Params.Keys do
-    FReq.AddParam(I, Params.Items[I]);
-
   FContent :=
     FReq
       .BaseURL(Url)
       .AddHeader(CONTENT_TYPE,APPLICATION_JSON)
-      .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
       .Post.Content;
 end;
 
-function TDefaultHttpClient.Put(Url: String;
-  Params: TDictionary<String, String>; Objects: TObject): ihttpClient;
+function TDefaultHttpClient.Put(Url : String) : ihttpClient;
 var
   I : String;
 begin
   Result := Self;
 
-  for I in Params.Keys do
-    FReq.AddParam(I, Params.Items[I]);
-
   FContent :=
     FReq
       .BaseURL(Url)
       .AddHeader(CONTENT_TYPE, APPLICATION_JSON)
-      .AddBody(TJSON.ObjectToJsonObject(Objects).ToJSON)
       .Put.Content;
 end;
 

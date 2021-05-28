@@ -5,8 +5,14 @@ interface
 uses
   JSON,
   DateUtils,
-  WooCommerce4D.Model.DTO.Interfaces, WooCommerce4D.Types,
-  WooCommerce4D.Model.DTO.MetaData;
+  WooCommerce4D.Model.DTO.Interfaces,
+  WooCommerce4D.Types,
+  WooCommerce4D.Model.DTO.MetaData,
+  WooCommerce4D.Model.DTO.Attributes,
+  WooCommerce4D.Model.DTO.Categories,
+  WooCommerce4D.Model.DTO.DefaultAttributes,
+  WooCommerce4D.Model.DTO.Dimensions, WooCommerce4D.Model.DTO.Downloads,
+  WooCommerce4D.Model.DTO.Images, WooCommerce4D.Model.DTO.Tags;
 
 type
   TModelProductDTO = class(TInterfacedObject, iModelProductDTO)
@@ -67,7 +73,7 @@ implementation
 
 function TModelProductDTO.Attributes: iModelAttributesDTO<iModelProductDTO>;
 begin
-//  Result := TModelAttributesDTO<iModelProductDTO>.New(Self);
+  Result := TModelAttributesDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.BackOrders(Value: TStatusType): iModelProductDTO;
@@ -91,7 +97,7 @@ end;
 
 function TModelProductDTO.Categories: iModelCategoriesDTO<iModelProductDTO>;
 begin
-//  result := TModelCategories<iModelProductDTO>.New(Self);
+  result := TModelCategoriesDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.&End: iModelProductDTO;
@@ -136,7 +142,7 @@ end;
 
 function TModelProductDTO.DefaultAttributes: iModelDefaultAttributesDTO<iModelProductDTO>;
 begin
-//  Result := TModeDefaultAttributesDTO<iModelProductDTO>.New(Self);
+  Result := TModelDefaultAttributesDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.Description(Value: String): iModelProductDTO;
@@ -153,12 +159,12 @@ end;
 
 function TModelProductDTO.Dimensions: iModelDimensionsDTO<iModelProductDTO>;
 begin
-//  Result := TModelDimensionsDTO<iModelProductDTO>.New(Self);
+  Result := TModelDimensionsDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.Downlaods: iModelDownloasDTO<iModelProductDTO>;
 begin
-//  Result := TModelDownloadsDTO<iModelProductDTO>.New(Self);
+  Result := TModelDownloasDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.Downloadable(Value: Boolean): iModelProductDTO;
@@ -199,7 +205,7 @@ end;
 
 function TModelProductDTO.Images: iModelImagesDTO<iModelProductDTO>;
 begin
-//  Result := TModelImagesDTO<iModelProductDTO>.New(Self);
+  Result := TModelImagesDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.ManageStock(Value: Boolean): iModelProductDTO;
@@ -304,7 +310,7 @@ end;
 
 function TModelProductDTO.Tags: iModelTagsDTO<iModelProductDTO>;
 begin
-//  Result := TModelTagsDTO<iModelProductDTO>.New(Self);
+  Result := TModelTagsDTO<iModelProductDTO>.New(Self);
 end;
 
 function TModelProductDTO.TaxClass(Value: String): iModelProductDTO;

@@ -125,7 +125,6 @@
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.Interfaces.pas"/>
         <DCCReference Include="src\oauth\WooCommerce4D.OAuth.OAuthConfig.pas"/>
         <DCCReference Include="src\httpClient\WooCommerce4D.HttpClient.DefaultHttpClient.pas"/>
-        <DCCReference Include="src\utils\WooCommerce4D.Types.pas"/>
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Interfaces.pas"/>
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.Coupons.pas"/>
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.MetaData.pas"/>
@@ -157,6 +156,8 @@
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.TaxRates.pas"/>
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.TaxClasses.pas"/>
         <DCCReference Include="src\model\dto\WooCommerce4D.Model.DTO.WebHooks.pas"/>
+        <DCCReference Include="src\model\WooCommerce4D.Model.Entitys.pas"/>
+        <DCCReference Include="src\utils\WooCommerce4D.Types.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -194,7 +195,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\..\..\..\..\Public\Documents\Embarcadero\Studio\21.0\Bpl\WooCommerce4D.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\..\Public\Documents\Embarcadero\Studio\21.0\Bpl\WooCommerce4D.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>WooCommerce4D.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

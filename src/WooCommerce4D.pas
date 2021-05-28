@@ -7,7 +7,8 @@ uses
   WooCommerce4D.OAuth.Interfaces,
   WooCommerce4D.OAuth.OAuthConfig,
   WooCommerce4D.HttpClient.Interfaces,
-  WooCommerce4D.HttpClient.WooCommerceAPI;
+  WooCommerce4D.HttpClient.WooCommerceAPI,
+  WooCommerce4D.Model.DTO.Interfaces, WooCommerce4D.Model.Entitys;
 
 type
   TWooCommerce4D = class(TInterfacedObject, iWooCommerce4D)
@@ -19,6 +20,7 @@ type
       class function New : iWooCommerce4D;
       function Config : iOAuthConfig;
       function Resources : iWooCommerce;
+      function Entity : iEntity;
   end;
 
 implementation
@@ -38,6 +40,11 @@ destructor TWooCommerce4D.Destroy;
 begin
 
   inherited;
+end;
+
+function TWooCommerce4D.Entity: iEntity;
+begin
+  Result := TEntity.New;
 end;
 
 class function TWooCommerce4D.New : iWooCommerce4D;

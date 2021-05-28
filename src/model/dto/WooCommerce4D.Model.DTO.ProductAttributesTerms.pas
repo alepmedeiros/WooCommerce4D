@@ -7,66 +7,66 @@ uses
   WooCommerce4D.Model.DTO.Interfaces;
 
 type
-  TModelProductAttributeTemrsDTO = class(TInterfacedObject, iModelProductAttributeTemrsDTO)
+  TModelProductAttributeTermsDTO = class(TInterfacedObject, iModelProductAttributeTermsDTO)
     private
       FJSON : TJSONObject;
     public
       constructor Create;
       destructor Destroy; override;
-      class function New : iModelProductAttributeTemrsDTO;
-      function Name(Value : String) : iModelProductAttributeTemrsDTO;//mandatory
-      function Slug(Value : String) : iModelProductAttributeTemrsDTO;
-      function Description(Value : String) : iModelProductAttributeTemrsDTO;
-      function MenuOrder(Value : Integer) : iModelProductAttributeTemrsDTO;
-      function &End : iModelProductAttributeTemrsDTO;
+      class function New : iModelProductAttributeTermsDTO;
+      function Name(Value : String) : iModelProductAttributeTermsDTO;//mandatory
+      function Slug(Value : String) : iModelProductAttributeTermsDTO;
+      function Description(Value : String) : iModelProductAttributeTermsDTO;
+      function MenuOrder(Value : Integer) : iModelProductAttributeTermsDTO;
+      function &End : iModelProductAttributeTermsDTO;
   end;
 
 implementation
 
-function TModelProductAttributeTemrsDTO.&End: iModelProductAttributeTemrsDTO;
+function TModelProductAttributeTermsDTO.&End: iModelProductAttributeTermsDTO;
 begin
-
+  Result := Self;
 end;
 
-constructor TModelProductAttributeTemrsDTO.Create;
+constructor TModelProductAttributeTermsDTO.Create;
 begin
   FJSON := TJSONObject.Create;
 end;
 
-function TModelProductAttributeTemrsDTO.Description(
-  Value: String): iModelProductAttributeTemrsDTO;
+function TModelProductAttributeTermsDTO.Description(
+  Value: String): iModelProductAttributeTermsDTO;
 begin
   Result := Self;
   FJSON.AddPair('description', value);
 end;
 
-destructor TModelProductAttributeTemrsDTO.Destroy;
+destructor TModelProductAttributeTermsDTO.Destroy;
 begin
   FJson.free;
   inherited;
 end;
 
-function TModelProductAttributeTemrsDTO.MenuOrder(
-  Value: Integer): iModelProductAttributeTemrsDTO;
+function TModelProductAttributeTermsDTO.MenuOrder(
+  Value: Integer): iModelProductAttributeTermsDTO;
 begin
   Result := Self;
   FJSON.AddPair('menu_order', TJSONNumber.Create(value));
 end;
 
-function TModelProductAttributeTemrsDTO.Name(
-  Value: String): iModelProductAttributeTemrsDTO;
+function TModelProductAttributeTermsDTO.Name(
+  Value: String): iModelProductAttributeTermsDTO;
 begin
   Result := Self;
   FJSON.AddPair('name', value);
 end;
 
-class function TModelProductAttributeTemrsDTO.New : iModelProductAttributeTemrsDTO;
+class function TModelProductAttributeTermsDTO.New : iModelProductAttributeTermsDTO;
 begin
   Result := Self.Create;
 end;
 
-function TModelProductAttributeTemrsDTO.Slug(
-  Value: String): iModelProductAttributeTemrsDTO;
+function TModelProductAttributeTermsDTO.Slug(
+  Value: String): iModelProductAttributeTermsDTO;
 begin
   Result := Self;
   FJSON.AddPair('slug', value);

@@ -5,8 +5,14 @@ interface
 uses
   JSON,
   WooCommerce4D.Model.DTO.Interfaces,
-  WooCommerce4D.Types, WooCommerce4D.Model.DTO.Billing,
-  WooCommerce4D.Model.DTO.MetaData, WooCommerce4D.Model.DTO.Shipping;
+  WooCommerce4D.Types,
+  WooCommerce4D.Model.DTO.Billing,
+  WooCommerce4D.Model.DTO.MetaData,
+  WooCommerce4D.Model.DTO.Shipping,
+  WooCommerce4D.Model.DTO.CouponsLines,
+  WooCommerce4D.Model.DTO.FreeLines,
+  WooCommerce4D.Model.DTO.LinesItems,
+  WooCommerce4D.Model.DTO.ShippingLines;
 
 type
   TModelOrdersDTO = class(TInterfacedObject, iModelOrdersDTO)
@@ -43,7 +49,7 @@ end;
 
 function TModelOrdersDTO.CouponLines: iModelCouponsLinesDTO<iModelOrdersDTO>;
 begin
-//  Result := TModelCouponsLines<iModelOrdersDTO>.New(Self);
+  Result := TModelCouponsLines<iModelOrdersDTO>.New(Self);
 end;
 
 function TModelOrdersDTO.&End: iModelOrdersDTO;
@@ -82,12 +88,12 @@ end;
 
 function TModelOrdersDTO.FreeLines: iModelFreeLinesDTO<iModelOrdersDTO>;
 begin
-//  Result := TModelFreeLinesDTO<iModelOrdersDTO>.New(Self);
+  Result := TModelFreeLinesDTO<iModelOrdersDTO>.New(Self);
 end;
 
 function TModelOrdersDTO.LineItems: iModelLinesItemsDTO<iModelOrdersDTO>;
 begin
-//  Result := TModelLinesItemsDTO<iModelOrdersDTO>.New(Self);
+  Result := TModelLinesItemsDTO<iModelOrdersDTO>.New(Self);
 end;
 
 function TModelOrdersDTO.MetaData: iModelMetaDataDTO<iModelOrdersDTO>;
@@ -125,7 +131,7 @@ end;
 
 function TModelOrdersDTO.ShippingLines: iModelShippingLinesDTO<iModelOrdersDTO>;
 begin
-//  Result := TModelShippingLinesDTO<iModelOrdersDTO>.New(Self);
+  Result := TModelShippingLinesDTO<iModelOrdersDTO>.New(Self);
 end;
 
 function TModelOrdersDTO.Status(Value: TStatusType): iModelOrdersDTO;

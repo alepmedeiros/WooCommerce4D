@@ -5,29 +5,31 @@ interface
 uses
   System.Generics.Collections,
   Data.DB,
-  WooCommerce4D.Types;
+  WooCommerce4D.Types, WooCommerce4D.Model.DTO.Interfaces;
 
 type
   iHttpClient = interface
     function Authentication(aUserName, aPassword : String) : ihttpClient;
     function Get(Url : String) : ihttpClient;
     function GetAll(Url : String) : ihttpClient;
-    function Post(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
-    function Put(Url : String; Params : TDictionary<String, String>; Objects : TObject) : ihttpClient;
-    function Delete(Url : String; Params : TDictionary<String, String>)  : ihttpClient;
+    function Post(Url : String) : ihttpClient;
+    function Put(Url : String) : ihttpClient;
+    function Delete(Url : String)  : ihttpClient;
+    function Params(aKey,aValue : String) : ihttpClient;
+    function Body(Value : iEntity) : ihttpClient;
     function DataSet(Value : TDataSet) : ihttpClient;
     function Content : String;
   end;
 
   iWooCommerce = interface
-    function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
-    function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-    function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
-    function GetAll(endpointBase : TEndpointBaseType; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
-    function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
-    function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
-    function Batch(endpointBase :
-    String; Objects : TDictionary<String, TObject>) : iWooCommerce;
+    function _Create(endpointBase : TEndpointBaseType) : iWooCommerce;
+    function Get(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+    function GetAll(endpointBase : TEndpointBaseType) : iWooCommerce;
+    function Update(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+    function Delete(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+    function Batch(endpointBase : TEndpointBaseType) : iWooCommerce;
+    function Params(aKey, aValue : String) : iWooCommerce;
+    function Body(Value : iEntity) : iWooCommerce;
     function DataSet(Value : TDataSet) : iWooCommerce;
     function Content : String;
   end;

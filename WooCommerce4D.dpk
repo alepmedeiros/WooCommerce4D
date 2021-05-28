@@ -44,7 +44,6 @@ contains
   WooCommerce4D.OAuth.Interfaces in 'src\oauth\WooCommerce4D.OAuth.Interfaces.pas',
   WooCommerce4D.OAuth.OAuthConfig in 'src\oauth\WooCommerce4D.OAuth.OAuthConfig.pas',
   WooCommerce4D.HttpClient.DefaultHttpClient in 'src\httpClient\WooCommerce4D.HttpClient.DefaultHttpClient.pas',
-  WooCommerce4D.Types in 'src\utils\WooCommerce4D.Types.pas',
   WooCommerce4D.Model.DTO.Interfaces in 'src\model\dto\WooCommerce4D.Model.DTO.Interfaces.pas',
   WooCommerce4D.Model.DTO.Coupons in 'src\model\dto\WooCommerce4D.Model.DTO.Coupons.pas',
   WooCommerce4D.Model.DTO.MetaData in 'src\model\dto\WooCommerce4D.Model.DTO.MetaData.pas',
@@ -75,6 +74,8 @@ contains
   WooCommerce4D.Model.DTO.ProductReviews in 'src\model\dto\WooCommerce4D.Model.DTO.ProductReviews.pas',
   WooCommerce4D.Model.DTO.TaxRates in 'src\model\dto\WooCommerce4D.Model.DTO.TaxRates.pas',
   WooCommerce4D.Model.DTO.TaxClasses in 'src\model\dto\WooCommerce4D.Model.DTO.TaxClasses.pas',
-  WooCommerce4D.Model.DTO.WebHooks in 'src\model\dto\WooCommerce4D.Model.DTO.WebHooks.pas';
+  WooCommerce4D.Model.DTO.WebHooks in 'src\model\dto\WooCommerce4D.Model.DTO.WebHooks.pas',
+  WooCommerce4D.Model.Entitys in 'src\model\WooCommerce4D.Model.Entitys.pas',
+  WooCommerce4D.Types in 'src\utils\WooCommerce4D.Types.pas';
 
 end.

@@ -7,7 +7,7 @@ uses
   WooCommerce4D.Model.DTO.Interfaces, WooCommerce4D.Model.DTO.MetaData;
 
 type
-  TMyClass<T : IInterface> = class(TInterfacedObject, iModelCouponsLinesDTO<T>)
+  TModelCouponsLines<T : IInterface> = class(TInterfacedObject, iModelCouponsLinesDTO<T>)
     private
       [weak]
       FParent : T;
@@ -23,35 +23,35 @@ type
 
 implementation
 
-function TMyClass<T>.Code(Value: String): iModelCouponsLinesDTO<T>;
+function TModelCouponsLines<T>.Code(Value: String): iModelCouponsLinesDTO<T>;
 begin
   Result := Self;
   FJSON.AddPair('code',value);
 end;
 
-function TMyClass<T>.&End: T;
+function TModelCouponsLines<T>.&End: T;
 begin
   Result := FParent;
 end;
 
-constructor TMyClass<T>.Create(Parent : T);
+constructor TModelCouponsLines<T>.Create(Parent : T);
 begin
   FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
-destructor TMyClass<T>.Destroy;
+destructor TModelCouponsLines<T>.Destroy;
 begin
   FJSON.Free;
   inherited;
 end;
 
-function TMyClass<T>.MetaData: iModelMetaDataDTO<iModelCouponsLinesDTO<T>>;
+function TModelCouponsLines<T>.MetaData: iModelMetaDataDTO<iModelCouponsLinesDTO<T>>;
 begin
   Result := TModelMetaDataDTO<iModelCouponsLinesDTO<T>>.New(Self);
 end;
 
-class function TMyClass<T>.New(Parent : T) : iModelCouponsLinesDTO<T>;
+class function TModelCouponsLines<T>.New(Parent : T) : iModelCouponsLinesDTO<T>;
 begin
   Result := Self.Create(Parent);
 end;

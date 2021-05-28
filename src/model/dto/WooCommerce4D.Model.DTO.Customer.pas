@@ -5,7 +5,9 @@ interface
 uses
   JSON,
   WooCommerce4D.Model.DTO.Interfaces,
-  WooCommerce4D.Model.DTO.MetaData;
+  WooCommerce4D.Model.DTO.MetaData,
+  WooCommerce4D.Model.DTO.Billing,
+  WooCommerce4D.Model.DTO.Shipping;
 
 type
   TModelCustomerDTO = class(TInterfacedObject, iModelCustomerDTO)
@@ -29,7 +31,7 @@ implementation
 
 function TModelCustomerDTO.Billing: iModelBillingDTO<iModelCustomerDTO>;
 begin
-//  Result := TModelBillingDTO<iModelCustomerDTO>.New(Self);
+  Result := TModelBillingDTO<iModelCustomerDTO>.New(Self);
 end;
 
 function TModelCustomerDTO.&End: iModelCustomerDTO;
@@ -78,7 +80,7 @@ end;
 
 function TModelCustomerDTO.Shipping: iModelShippingDTO<iModelCustomerDTO>;
 begin
-//  Result := TModelShippingDTO<iModelCustomerDTO>.New(self);
+  Result := TModelShippingDTO<iModelCustomerDTO>.New(self);
 end;
 
 function TModelCustomerDTO.UserName(Value: String): iModelCustomerDTO;

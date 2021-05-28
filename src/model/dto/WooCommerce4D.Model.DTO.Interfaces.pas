@@ -298,12 +298,12 @@ type
     function &End : iModelProductAttributeDTO;
   end;
 
-  iModelProductAttributeTemrsDTO = interface
-    function Name(Value : String) : iModelProductAttributeTemrsDTO;//mandatory
-    function Slug(Value : String) : iModelProductAttributeTemrsDTO;
-    function Description(Value : String) : iModelProductAttributeTemrsDTO;
-    function MenuOrder(Value : Integer) : iModelProductAttributeTemrsDTO;
-    function &End : iModelProductAttributeTemrsDTO;
+  iModelProductAttributeTermsDTO = interface
+    function Name(Value : String) : iModelProductAttributeTermsDTO;//mandatory
+    function Slug(Value : String) : iModelProductAttributeTermsDTO;
+    function Description(Value : String) : iModelProductAttributeTermsDTO;
+    function MenuOrder(Value : Integer) : iModelProductAttributeTermsDTO;
+    function &End : iModelProductAttributeTermsDTO;
   end;
 
   iModelProductCategoriesDTO = interface
@@ -370,6 +370,24 @@ type
     function Topic(Value : String) : iModelWebHooksDTO;//mandatory
     function Secret(Value : String) : iModelWebHooksDTO;
     function &End : iModelWebHooksDTO;
+  end;
+
+  iEntity = interface
+    function Coupons : iModelCouponsDTO;
+    function Customers : iModelCustomerDTO;
+    function Orders : iModelOrdersDTO;
+    function OrdersNote : iModelOrderNotesDTO;
+    function Refunds : iModelRefundDTO;
+    function Products : iModelProductDTO;
+    function ProductVariations : iModelProductVariationDTO;
+    function ProductAttributes : iModelProductAttributeDTO;
+    function ProductAttributeTerms : iModelProductAttributeTermsDTO;
+    function ProductCategories : iModelProductCategoriesDTO;
+    function ProductShippingClasses : iModelProductShippingClassesDTO;
+    function ProductTags : iModelProductTagsDTO;
+    function ProductReviews : iModelProductReviewDTO;
+    function Content : String;
+    function &End : iEntity;
   end;
 
 implementation

@@ -9,7 +9,7 @@ uses
   WooCommerce4D.HttpClient.DefaultHttpClient,
   System.SysUtils,
   WooCommerce4D.Types,
-  Data.DB;
+  Data.DB, WooCommerce4D.Model.DTO.Interfaces;
 
 type
   TWooCommerceAPI = class(TInterfacedObject, iWooCommerce)
@@ -17,9 +17,7 @@ type
       [weak]
       FParent : iOAuthConfig;
       FHttpClient : iHttpClient;
-      FApiVersion : String;
       FUrl : String;
-    function Params(Value: TDictionary<String, String>): iWooCommerce;
 
       const
         API_URL_FORMAT = '%s/wp-json/wc/%s/%s';
@@ -30,13 +28,14 @@ type
       constructor Create(Parent : iOAuthConfig);
       destructor Destroy; override;
       class function New(Parent : iOAuthConfig) : iWooCommerce;
-      function &Create(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
-      function Get(endpointBase : String; Id : Integer) : iWooCommerce;
-      function GetAll(endpointBase : String; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
-      function GetAll(endpointBase : TEndpointBaseType; Params : TDictionary<String, String> = nil) : iWooCommerce; overload;
-      function Update(endpointBase : String; Id : Integer; Objects : TDictionary<String, TObject>) : iWooCommerce;
-      function Delete(endpointBase : String; Id : Integer) : iWooCommerce;
-      function Batch(endpointBase : String; Objects : TDictionary<String, TObject>) : iWooCommerce;
+      function _Create(endpointBase : TEndpointBaseType) : iWooCommerce;
+      function Get(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+      function GetAll(endpointBase : TEndpointBaseType) : iWooCommerce;
+      function Update(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+      function Delete(endpointBase : TEndpointBaseType; Id : Integer) : iWooCommerce;
+      function Batch(endpointBase : TEndpointBaseType) : iWooCommerce;
+      function Params(aKey, aValue : String) : iWooCommerce;
+      function Body(Value : iEntity) : iWooCommerce;
       function DataSet(Value : TDataSet) : iWooCommerce;
       function Content : String;
   end;
@@ -49,8 +48,12 @@ begin
   FHttpClient := TDefaultHttpClient.New;
 
   FHttpClient.Authentication(FParent.ConsumerKey, FParent.ConsumerSecret);
+end;
 
-  FApiVersion := FParent.Version;
+function TWooCommerceAPI.Body(Value: iEntity): iWooCommerce;
+begin
+  Result := Self;
+  FHttpClient.Body(Value);
 end;
 
 function TWooCommerceAPI.Content: String;
@@ -58,11 +61,12 @@ begin
   Result := FHttpClient.Content;
 end;
 
-function TWooCommerceAPI.&Create(endpointBase: String;
-  Objects: TDictionary<String, TObject>): iWooCommerce;
+function TWooCommerceAPI._Create(endpointBase: TEndpointBaseType): iWooCommerce;
 begin
   Result := Self;
-  Furl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase]);
+
+  FHttpClient.Post(Format(API_URL_FORMAT, [FParent.Url, FParent.Version,
+    endpointBase.GetValue]));
 end;
 
 function TWooCommerceAPI.DataSet(Value: TDataSet): iWooCommerce;
@@ -71,10 +75,13 @@ begin
   FHttpClient.DataSet(Value);
 end;
 
-function TWooCommerceAPI.Delete(endpointBase: String;
+function TWooCommerceAPI.Delete(endpointBase: TEndpointBaseType;
   Id: Integer): iWooCommerce;
 begin
   Result := Self;
+
+  FHttpClient.Delete(Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FParent.Version,
+    endpointBase.GetValue, id]));
 end;
 
 destructor TWooCommerceAPI.Destroy;
@@ -83,33 +90,20 @@ begin
   inherited;
 end;
 
-function TWooCommerceAPI.Get(endpointBase: String; Id: Integer): iWooCommerce;
+function TWooCommerceAPI.Get(endpointBase: TEndpointBaseType; Id: Integer): iWooCommerce;
 begin
   Result := Self;
 
-  Furl := Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FApiVersion, endpointBase, id]);
-
-  FHttpClient.Get(Furl);
+  FHttpClient.Get(Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FParent.Version,
+      endpointBase.GetValue, id]));
 end;
 
-function TWooCommerceAPI.GetAll(endpointBase: TEndpointBaseType;
-  Params: TDictionary<String, String>): iWooCommerce;
+function TWooCommerceAPI.GetAll(endpointBase: TEndpointBaseType): iWooCommerce;
 begin
   Result := Self;
 
-  FUrl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase.GetValue]);
-
-  FHttpClient.Get(FUrl);
-end;
-
-function TWooCommerceAPI.GetAll(endpointBase: String;
-  Params: TDictionary<String, String>): iWooCommerce;
-begin
-  Result := Self;
-
-  FUrl := Format(API_URL_FORMAT, [FParent.Url, FApiVersion, endpointBase]);
-
-  FHttpClient.Get(FUrl);
+  FHttpClient.Get(Format(API_URL_FORMAT, [FParent.Url, FParent.Version,
+    endpointBase.GetValue]));
 end;
 
 class function TWooCommerceAPI.New (Parent : iOAuthConfig) : iWooCommerce;
@@ -117,22 +111,23 @@ begin
   Result := Self.Create(Parent);
 end;
 
-function TWooCommerceAPI.Params(
-  Value: TDictionary<String, String>): iWooCommerce;
+function TWooCommerceAPI.Params(aKey, aValue: String): iWooCommerce;
+begin
+  Result := Self;
+  FHttpClient.Params(aKey,aValue);
+end;
+
+function TWooCommerceAPI.Batch(endpointBase: TEndpointBaseType): iWooCommerce;
 begin
   Result := Self;
 end;
 
-function TWooCommerceAPI.Batch(endpointBase: String;
-  Objects: TDictionary<String, TObject>): iWooCommerce;
+function TWooCommerceAPI.Update(endpointBase: TEndpointBaseType; Id: Integer): iWooCommerce;
 begin
   Result := Self;
-end;
 
-function TWooCommerceAPI.Update(endpointBase: String; Id: Integer;
-  Objects: TDictionary<String, TObject>): iWooCommerce;
-begin
-  Result := Self;
+  FHttpClient.Put(Format(API_URL_ONE_ENTITY_FORMAT, [FParent.Url, FParent.Version,
+    endpointBase.GetValue, id]));
 end;
 
 end.

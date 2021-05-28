@@ -5,7 +5,8 @@ interface
 uses
   JSON,
   WooCommerce4D.Model.DTO.Interfaces,
-  WooCommerce4D.Types, WooCommerce4D.Model.DTO.Images;
+  WooCommerce4D.Types,
+  WooCommerce4D.Model.DTO.Images;
 
 type
   TModelProductCategoriesDTO = class(TInterfacedObject, iModelProductCategoriesDTO)

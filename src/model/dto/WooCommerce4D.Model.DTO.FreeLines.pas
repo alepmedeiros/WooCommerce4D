@@ -8,7 +8,7 @@ uses
   WooCommerce4D.Types, WooCommerce4D.Model.DTO.MetaData;
 
 type
-  TMyClass<T : IInterface> = class(TInterfacedObject, iModelFreeLinesDTO<T>)
+  TModelFreeLinesDTO<T : IInterface> = class(TInterfacedObject, iModelFreeLinesDTO<T>)
     private
       [weak]
       FParent : T;
@@ -27,52 +27,52 @@ type
 
 implementation
 
-function TMyClass<T>.&End: T;
+function TModelFreeLinesDTO<T>.&End: T;
 begin
   Result := FParent;
 end;
 
-constructor TMyClass<T>.Create(Parent : T);
+constructor TModelFreeLinesDTO<T>.Create(Parent : T);
 begin
   FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
-destructor TMyClass<T>.Destroy;
+destructor TModelFreeLinesDTO<T>.Destroy;
 begin
   FJson.Free;
   inherited;
 end;
 
-function TMyClass<T>.MetaData: iModelMetaDataDTO<iModelFreeLinesDTO<T>>;
+function TModelFreeLinesDTO<T>.MetaData: iModelMetaDataDTO<iModelFreeLinesDTO<T>>;
 begin
   Result := TModelMetaDataDTO<iModelFreeLinesDTO<T>>.New(Self);
 end;
 
-function TMyClass<T>.Name(Value: String): iModelFreeLinesDTO<T>;
+function TModelFreeLinesDTO<T>.Name(Value: String): iModelFreeLinesDTO<T>;
 begin
   Result := Self;
   FJson.AddPair('name',value);
 end;
 
-class function TMyClass<T>.New(Parent : T) : iModelFreeLinesDTO<T>;
+class function TModelFreeLinesDTO<T>.New(Parent : T) : iModelFreeLinesDTO<T>;
 begin
   Result := Self.Create(Parent);
 end;
 
-function TMyClass<T>.TaxClass(Value: String): iModelFreeLinesDTO<T>;
+function TModelFreeLinesDTO<T>.TaxClass(Value: String): iModelFreeLinesDTO<T>;
 begin
   Result := Self;
   FJson.AddPair('tax_class',value);
 end;
 
-function TMyClass<T>.taxStatus(Value: TStatusType): iModelFreeLinesDTO<T>;
+function TModelFreeLinesDTO<T>.taxStatus(Value: TStatusType): iModelFreeLinesDTO<T>;
 begin
   Result := Self;
   FJson.AddPair('tax_status',value.GetValue);
 end;
 
-function TMyClass<T>.Total(Value: String): iModelFreeLinesDTO<T>;
+function TModelFreeLinesDTO<T>.Total(Value: String): iModelFreeLinesDTO<T>;
 begin
   Result := Self;
   FJson.AddPair('total', value);
