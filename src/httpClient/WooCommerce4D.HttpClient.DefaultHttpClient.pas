@@ -30,7 +30,7 @@ type
         function Post(Url : String) : ihttpClient;
         function Put(Url : String) : ihttpClient;
         function Delete(Url : String)  : ihttpClient;
-        function Params(aKey,aValue : String) : ihttpClient;
+        function Params(aKey,aValue : VAriant) : ihttpClient;
         function Body(Value : iEntity) : ihttpClient;
         function DataSet(Value : TDataSet) : ihttpClient;
         function Content : String;
@@ -110,7 +110,7 @@ begin
   Result := Self.Create;
 end;
 
-function TDefaultHttpClient.Params(aKey, aValue: String): ihttpClient;
+function TDefaultHttpClient.Params(aKey, aValue: VAriant): ihttpClient;
 begin
   Result := Self;
   FReq.AddParam(aKey, aValue);

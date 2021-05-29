@@ -9,27 +9,30 @@ uses
 type
   TModelProductAttributeTermsDTO = class(TInterfacedObject, iModelProductAttributeTermsDTO)
     private
+      [weak]
+      FParent : iEntity;
       FJSON : TJSONObject;
     public
-      constructor Create;
+      constructor Create(Parent : iEntity);
       destructor Destroy; override;
-      class function New : iModelProductAttributeTermsDTO;
+      class function New(Parent : iEntity) : iModelProductAttributeTermsDTO;
       function Name(Value : String) : iModelProductAttributeTermsDTO;//mandatory
       function Slug(Value : String) : iModelProductAttributeTermsDTO;
       function Description(Value : String) : iModelProductAttributeTermsDTO;
       function MenuOrder(Value : Integer) : iModelProductAttributeTermsDTO;
-      function &End : iModelProductAttributeTermsDTO;
+      function &End : iEntity;
   end;
 
 implementation
 
-function TModelProductAttributeTermsDTO.&End: iModelProductAttributeTermsDTO;
+function TModelProductAttributeTermsDTO.&End: iEntity;
 begin
-  Result := Self;
+  Result := FParent.Content(FJSON.ToJSON);
 end;
 
-constructor TModelProductAttributeTermsDTO.Create;
+constructor TModelProductAttributeTermsDTO.Create(Parent : iEntity);
 begin
+  FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
@@ -60,9 +63,9 @@ begin
   FJSON.AddPair('name', value);
 end;
 
-class function TModelProductAttributeTermsDTO.New : iModelProductAttributeTermsDTO;
+class function TModelProductAttributeTermsDTO.New (Parent : iEntity) : iModelProductAttributeTermsDTO;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TModelProductAttributeTermsDTO.Slug(

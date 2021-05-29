@@ -3,7 +3,7 @@ unit WooCommerce4D.Model.DTO.Interfaces;
 interface
 
 uses
-  WooCommerce4D.Types;
+  WooCommerce4D.Types, System.JSON;
 
 type
   iModelMetaDataDTO<T> = interface;
@@ -20,6 +20,7 @@ type
   iModelImagesDTO<T> = interface;
   iModelAttributesDTO<T> = interface;
   iModelDefaultAttributesDTO<T> = interface;
+  iEntity = interface;
 
   iModelCouponsDTO = interface
     function Code(Value: String): iModelCouponsDTO; // obrigatorio
@@ -42,7 +43,7 @@ type
     function MaximumAmount(Value: String): iModelCouponsDTO;
     function EmailRestrictions(Value: String): iModelCouponsDTO; // array de ids
     function MetaData: iModelMetaDataDTO<iModelCouponsDTO>;
-    function &End: iModelCouponsDTO;
+    function &End: iEntity;
   end;
 
   iModelMetaDataDTO<T> = interface
@@ -60,7 +61,7 @@ type
     function Billing: iModelBillingDTO<iModelCustomerDTO>;
     function Shipping: iModelShippingDTO<iModelCustomerDTO>;
     function MetaData: iModelMetaDataDTO<iModelCustomerDTO>;
-    function &End: iModelCustomerDTO;
+    function &End: iEntity;
   end;
 
   iModelBillingDTO<T> = interface
@@ -206,7 +207,7 @@ type
     function GroupedProducts(Value : String) : iModelProductDTO;
     function MenuOrder(Value : integer) : iModelProductDTO;
     function MetaData : iModelMetaDataDTO<iModelProductDTO>;
-    function &End: iModelProductDTO;
+    function &End: iEntity;
   end;
 
   iModelDownloasDTO<T> = interface
@@ -217,7 +218,7 @@ type
   end;
 
   iModelDimensionsDTO<T> = interface
-    function _Lenght(Value : String) : iModelDimensionsDTO<T>;
+    function _Length(Value : String) : iModelDimensionsDTO<T>;
     function Width(Value : String) : iModelDimensionsDTO<T>;
     function Height(Value : String) : iModelDimensionsDTO<T>;
     function &End : T;
@@ -225,6 +226,7 @@ type
 
   iModelCategoriesDTO<T> = interface
     function Id(Value : Integer) : iModelCategoriesDTO<T>;
+    function Next : iModelCategoriesDTO<T>;
     function &End : T;
   end;
 
@@ -238,6 +240,7 @@ type
     function Src(Value : String) : iModelImagesDTO<T>;
     function Name(Value : String) : iModelImagesDTO<T>;
     function Alt(Value : string) : iModelImagesDTO<T>;
+    function Next : iModelImagesDTO<T>;
     function &End : T;
   end;
 
@@ -286,7 +289,7 @@ type
     function Attributes : iModelAttributesDTO<iModelProductVariationDTO>;
     function MenuOrder(Value : Integer) : iModelProductVariationDTO;
     function MetaData : iModelMetaDataDTO<iModelProductVariationDTO>;
-    function &End : iModelProductVariationDTO;
+    function &End : iEntity;
   end;
 
   iModelProductAttributeDTO = interface
@@ -295,7 +298,7 @@ type
     function _Type(Value : TStatusType = SELECT) : iModelProductAttributeDTO;
     function OrderBy(Value : TStatusType) : iModelProductAttributeDTO;
     function HasArchives(Value : Boolean = false) : iModelProductAttributeDTO;
-    function &End : iModelProductAttributeDTO;
+    function &End : iEntity;
   end;
 
   iModelProductAttributeTermsDTO = interface
@@ -303,7 +306,7 @@ type
     function Slug(Value : String) : iModelProductAttributeTermsDTO;
     function Description(Value : String) : iModelProductAttributeTermsDTO;
     function MenuOrder(Value : Integer) : iModelProductAttributeTermsDTO;
-    function &End : iModelProductAttributeTermsDTO;
+    function &End : iEntity;
   end;
 
   iModelProductCategoriesDTO = interface
@@ -314,7 +317,7 @@ type
     function Display(Value : TStatusType = DEFAULT) : iModelProductCategoriesDTO;
     function Image : iModelImagesDTO<iModelProductCategoriesDTO>;
     function MenuOrder(Value : Integer) : iModelProductCategoriesDTO;
-    function &End : iModelProductCategoriesDTO;
+    function &End : iEntity;
   end;
 
   iModelProductShippingClassesDTO = interface
@@ -386,8 +389,8 @@ type
     function ProductShippingClasses : iModelProductShippingClassesDTO;
     function ProductTags : iModelProductTagsDTO;
     function ProductReviews : iModelProductReviewDTO;
-    function Content : String;
-    function &End : iEntity;
+    function Content(Value : String) : iEntity; overload;
+    function Content : String; overload;
   end;
 
 implementation

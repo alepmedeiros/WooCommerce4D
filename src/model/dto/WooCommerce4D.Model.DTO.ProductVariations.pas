@@ -13,11 +13,13 @@ uses
 type
   TModelProductVariationDTO = class(TInterfacedObject, iModelProductVariationDTO)
     private
+      [weak]
+      FParent : iEntity;
       FJSON : TJSONObject;
     public
-      constructor Create;
+      constructor Create(Parent : iEntity);
       destructor Destroy; override;
-      class function New : iModelProductVariationDTO;
+      class function New(Parent : iEntity) : iModelProductVariationDTO;
       function Description(Value : String) : iModelProductVariationDTO;
       function Sku(Value : String) : iModelProductVariationDTO;
       function RegularPrice(Value : String) : iModelProductVariationDTO;
@@ -45,7 +47,7 @@ type
       function Attributes : iModelAttributesDTO<iModelProductVariationDTO>;
       function MenuOrder(Value : Integer) : iModelProductVariationDTO;
       function MetaData : iModelMetaDataDTO<iModelProductVariationDTO>;
-      function &End : iModelProductVariationDTO;
+      function &End : iEntity;
   end;
 
 implementation
@@ -62,13 +64,14 @@ begin
   FJSON.AddPair('backorders',value.getvalue);
 end;
 
-function TModelProductVariationDTO.&End: iModelProductVariationDTO;
+function TModelProductVariationDTO.&End: iEntity;
 begin
-  Result := Self;
+  Result := FParent.Content(FJson.ToJSON);
 end;
 
-constructor TModelProductVariationDTO.Create;
+constructor TModelProductVariationDTO.Create(Parent : iEntity);
 begin
+  FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
@@ -115,7 +118,7 @@ end;
 
 function TModelProductVariationDTO.Dimensions: iModelDimensionsDTO<iModelProductVariationDTO>;
 begin
-  Result := TModelDimensionsDTO<iModelProductVariationDTO>.New(Self);
+  Result := TModelDimensionsDTO<iModelProductVariationDTO>.New(Self, FJSON);
 end;
 
 function TModelProductVariationDTO.Downloadble(
@@ -146,7 +149,7 @@ end;
 
 function TModelProductVariationDTO.Image: iModelImagesDTO<iModelProductVariationDTO>;
 begin
-  Result := TModelImagesDTO<iModelProductVariationDTO>.New(Self);
+  Result := TModelImagesDTO<iModelProductVariationDTO>.New(Self, FJSON);
 end;
 
 function TModelProductVariationDTO.ManageStock(
@@ -168,9 +171,9 @@ begin
   Result := TModelMetaDataDTO<iModelProductVariationDTO>.New(Self);
 end;
 
-class function TModelProductVariationDTO.New : iModelProductVariationDTO;
+class function TModelProductVariationDTO.New (Parent : iEntity) : iModelProductVariationDTO;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TModelProductVariationDTO.RegularPrice(

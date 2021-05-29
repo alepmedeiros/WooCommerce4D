@@ -12,11 +12,13 @@ uses
 type
   TModelCustomerDTO = class(TInterfacedObject, iModelCustomerDTO)
     private
+      [weak]
+      FParent : iEntity;
       FJson : TJsonObject;
     public
-      constructor Create;
+      constructor Create(Parent : iEntity);
       destructor Destroy; override;
-      class function New : iModelCustomerDTO;
+      class function New(Parent : iEntity) : iModelCustomerDTO;
       function Email(Value: String): iModelCustomerDTO; // mandatory
       function FirstName(Value: String): iModelCustomerDTO;
       function LastName(Value: String): iModelCustomerDTO;
@@ -24,7 +26,7 @@ type
       function Billing: iModelBillingDTO<iModelCustomerDTO>;
       function Shipping: iModelShippingDTO<iModelCustomerDTO>;
       function MetaData: iModelMetaDataDTO<iModelCustomerDTO>;
-      function &End: iModelCustomerDTO;
+      function &End: iEntity;
   end;
 
 implementation
@@ -34,13 +36,14 @@ begin
   Result := TModelBillingDTO<iModelCustomerDTO>.New(Self);
 end;
 
-function TModelCustomerDTO.&End: iModelCustomerDTO;
+function TModelCustomerDTO.&End: iEntity;
 begin
-  Result := Self;
+  Result := FParent;
 end;
 
-constructor TModelCustomerDTO.Create;
+constructor TModelCustomerDTO.Create(Parent : iEntity);
 begin
+  FParent := Parent;
   FJson := TJsonObject.Create;
 end;
 
@@ -73,9 +76,9 @@ begin
   Result := TModelMetaDataDTO<iModelCustomerDTO>.New(Self);
 end;
 
-class function TModelCustomerDTO.New : iModelCustomerDTO;
+class function TModelCustomerDTO.New (Parent : iEntity) : iModelCustomerDTO;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TModelCustomerDTO.Shipping: iModelShippingDTO<iModelCustomerDTO>;

@@ -11,11 +11,13 @@ uses
 type
   TModelProductCategoriesDTO = class(TInterfacedObject, iModelProductCategoriesDTO)
     private
+      [weak]
+      FParent : iEntity;
       FJSON : TJSONObject;
     public
-      constructor Create;
+      constructor Create(Parent : iEntity);
       destructor Destroy; override;
-      class function New : iModelProductCategoriesDTO;
+      class function New(Parent : iEntity) : iModelProductCategoriesDTO;
       function Name(value : String) : iModelProductCategoriesDTO;
       function Slug(Value : String) : iModelProductCategoriesDTO;
       function Parent(Value : Integer) : iModelProductCategoriesDTO;
@@ -23,18 +25,19 @@ type
       function Display(Value : TStatusType = DEFAULT) : iModelProductCategoriesDTO;
       function Image : iModelImagesDTO<iModelProductCategoriesDTO>;
       function MenuOrder(Value : Integer) : iModelProductCategoriesDTO;
-      function &End : iModelProductCategoriesDTO;
+      function &End : iEntity;
   end;
 
 implementation
 
-function TModelProductCategoriesDTO.&End: iModelProductCategoriesDTO;
+function TModelProductCategoriesDTO.&End: iEntity;
 begin
-  Result := Self;
+  Result := FParent.Content(FJSON.ToJSON);
 end;
 
-constructor TModelProductCategoriesDTO.Create;
+constructor TModelProductCategoriesDTO.Create(Parent : iEntity);
 begin
+  FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
@@ -60,7 +63,7 @@ end;
 
 function TModelProductCategoriesDTO.Image: iModelImagesDTO<iModelProductCategoriesDTO>;
 begin
-  Result := TModelImagesDTO<iModelProductCategoriesDTO>.New(Self);
+  Result := TModelImagesDTO<iModelProductCategoriesDTO>.New(Self, FJSON);
 end;
 
 function TModelProductCategoriesDTO.MenuOrder(
@@ -77,9 +80,9 @@ begin
   FJSON.AddPair('name',value);
 end;
 
-class function TModelProductCategoriesDTO.New : iModelProductCategoriesDTO;
+class function TModelProductCategoriesDTO.New (Parent : iEntity) : iModelProductCategoriesDTO;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TModelProductCategoriesDTO.Parent(

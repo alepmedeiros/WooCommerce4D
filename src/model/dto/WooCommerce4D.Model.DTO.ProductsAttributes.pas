@@ -10,28 +10,31 @@ uses
 type
   TModelProductAttributeDTO = class(TInterfacedObject, iModelProductAttributeDTO)
     private
+      [weak]
+      FParent : iEntity;
       FJSON : TJSONObject;
     public
-      constructor Create;
+      constructor Create(Parent : iEntity);
       destructor Destroy; override;
-      class function New : iModelProductAttributeDTO;
+      class function New(Parent : iEntity) : iModelProductAttributeDTO;
       function Name(Value : String) : iModelProductAttributeDTO;//mandatory
       function Slug(Value : String) : iModelProductAttributeDTO;
       function _Type(Value : TStatusType = SELECT) : iModelProductAttributeDTO;
       function OrderBy(Value : TStatusType) : iModelProductAttributeDTO;
       function HasArchives(Value : Boolean = false) : iModelProductAttributeDTO;
-      function &End : iModelProductAttributeDTO;
+      function &End : iEntity;
   end;
 
 implementation
 
-function TModelProductAttributeDTO.&End: iModelProductAttributeDTO;
+function TModelProductAttributeDTO.&End: iEntity;
 begin
-  Result := Self;
+  Result := FParent.Content(FJSON.ToJSON);
 end;
 
-constructor TModelProductAttributeDTO.Create;
+constructor TModelProductAttributeDTO.Create(Parent : iEntity);
 begin
+  FParent := Parent;
   FJSON := TJSONObject.Create;
 end;
 
@@ -55,9 +58,9 @@ begin
   FJSON.AddPair('name', Value);
 end;
 
-class function TModelProductAttributeDTO.New : iModelProductAttributeDTO;
+class function TModelProductAttributeDTO.New (Parent : iEntity) : iModelProductAttributeDTO;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TModelProductAttributeDTO.OrderBy(

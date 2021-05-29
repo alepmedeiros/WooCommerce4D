@@ -20,27 +20,27 @@ uses
 
 type
   TEntity = class(TInterfacedObject, iEntity)
-    private
-      FContent : String;
-    public
-      constructor Create;
-      destructor Destroy; override;
-      class function New : iEntity;
-      function Coupons : iModelCouponsDTO;
-      function Customers : iModelCustomerDTO;
-      function Orders : iModelOrdersDTO;
-      function OrdersNote : iModelOrderNotesDTO;
-      function Refunds : iModelRefundDTO;
-      function Products : iModelProductDTO;
-      function ProductVariations : iModelProductVariationDTO;
-      function ProductAttributes : iModelProductAttributeDTO;
-      function ProductAttributeTerms : iModelProductAttributeTermsDTO;
-      function ProductCategories : iModelProductCategoriesDTO;
-      function ProductShippingClasses : iModelProductShippingClassesDTO;
-      function ProductTags : iModelProductTagsDTO;
-      function ProductReviews : iModelProductReviewDTO;
-      function Content : String;
-      function &End : iEntity;
+  private
+    FContent: String;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iEntity;
+    function Coupons: iModelCouponsDTO;
+    function Customers: iModelCustomerDTO;
+    function Orders: iModelOrdersDTO;
+    function OrdersNote: iModelOrderNotesDTO;
+    function Refunds: iModelRefundDTO;
+    function Products: iModelProductDTO;
+    function ProductVariations: iModelProductVariationDTO;
+    function ProductAttributes: iModelProductAttributeDTO;
+    function ProductAttributeTerms: iModelProductAttributeTermsDTO;
+    function ProductCategories: iModelProductCategoriesDTO;
+    function ProductShippingClasses: iModelProductShippingClassesDTO;
+    function ProductTags: iModelProductTagsDTO;
+    function ProductReviews: iModelProductReviewDTO;
+    function Content(Value: String): iEntity; overload;
+    function Content: String; overload;
   end;
 
 implementation
@@ -50,33 +50,32 @@ begin
   Result := FContent;
 end;
 
-function TEntity.Coupons: iModelCouponsDTO;
-begin
-  Result := TModelCouponsDTO.New;
-end;
-
-function TEntity.&End: iEntity;
+function TEntity.Content(Value: String): iEntity;
 begin
   Result := Self;
+  FContent := Value;
+end;
+
+function TEntity.Coupons: iModelCouponsDTO;
+begin
+  Result := TModelCouponsDTO.New(Self);
 end;
 
 constructor TEntity.Create;
 begin
-
 end;
 
 function TEntity.Customers: iModelCustomerDTO;
 begin
-  Result := TModelCustomerDTO.New;
+  Result := TModelCustomerDTO.New(self);
 end;
 
 destructor TEntity.Destroy;
 begin
-
   inherited;
 end;
 
-class function TEntity.New : iEntity;
+class function TEntity.New: iEntity;
 begin
   Result := Self.Create;
 end;
@@ -93,17 +92,17 @@ end;
 
 function TEntity.ProductAttributes: iModelProductAttributeDTO;
 begin
-  Result := TModelProductAttributeDTO.New;
+  Result := TModelProductAttributeDTO.New(Self);
 end;
 
 function TEntity.ProductAttributeTerms: iModelProductAttributeTermsDTO;
 begin
-  Result := TModelProductAttributeTermsDTO.New;
+  Result := TModelProductAttributeTermsDTO.New(Self);
 end;
 
 function TEntity.ProductCategories: iModelProductCategoriesDTO;
 begin
-  Result := TModelProductCategoriesDTO.New;
+  Result := TModelProductCategoriesDTO.New(Self);
 end;
 
 function TEntity.ProductReviews: iModelProductReviewDTO;
@@ -113,7 +112,7 @@ end;
 
 function TEntity.Products: iModelProductDTO;
 begin
-  Result := TModelProductDTO.New;
+  Result := TModelProductDTO.New(Self);
 end;
 
 function TEntity.ProductShippingClasses: iModelProductShippingClassesDTO;
@@ -128,7 +127,7 @@ end;
 
 function TEntity.ProductVariations: iModelProductVariationDTO;
 begin
-  Result := TModelProductVariationDTO.New;
+  Result := TModelProductVariationDTO.New(self);
 end;
 
 function TEntity.Refunds: iModelRefundDTO;
