@@ -102,6 +102,13 @@ type
     edtBaixaDescricao: TEdit;
     FDMemTable1: TFDMemTable;
     Button1: TButton;
+    TabSheet8: TTabSheet;
+    edtURL: TEdit;
+    Label21: TLabel;
+    edtConsumerKey: TEdit;
+    Label22: TLabel;
+    edtConsumerSecret: TEdit;
+    Label23: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnCadastrarProdClick(Sender: TObject);
     procedure btnAtribClick(Sender: TObject);
@@ -276,9 +283,9 @@ procedure TForm2.FormCreate(Sender: TObject);
 begin
 Fwoocommerce := TWooCommerce4D.new;
   Fwoocommerce.Config
-    .Url('https://loja.sylasfilho.com.br')
-    .ConsumerKey('ck_62750ff7aa1bc669227dfd2736a6687805feebf3')
-    .ConsumerSecret('cs_9e87aaae1c193ee6e9debbdcc38023b0510163d7')
+    .Url(edtURL.Text)
+    .ConsumerKey(edtConsumerKey.Text)
+    .ConsumerSecret(edtConsumerSecret.Text)
     .Version(TApiVersionType.V3.ToString);
 end;
 

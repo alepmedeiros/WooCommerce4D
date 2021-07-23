@@ -77,7 +77,7 @@ object Form2: TForm2
     Top = 40
     Width = 492
     Height = 284
-    ActivePage = TabSheet6
+    ActivePage = TabSheet8
     Align = alClient
     MultiLine = True
     TabOrder = 1
@@ -680,6 +680,70 @@ object Form2: TForm2
         Height = 256
         Align = alClient
         TabOrder = 0
+      end
+    end
+    object TabSheet8: TTabSheet
+      Caption = 'Configura'#231#227'o'
+      ImageIndex = 7
+      object Label21: TLabel
+        Left = 3
+        Top = 10
+        Width = 22
+        Height = 13
+        Caption = 'URL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label22: TLabel
+        Left = 3
+        Top = 66
+        Width = 81
+        Height = 13
+        Caption = 'Consumer Key'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label23: TLabel
+        Left = 186
+        Top = 66
+        Width = 97
+        Height = 13
+        Caption = 'Consumer Secret'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edtURL: TEdit
+        Left = 3
+        Top = 29
+        Width = 177
+        Height = 21
+        TabOrder = 0
+      end
+      object edtConsumerKey: TEdit
+        Left = 3
+        Top = 85
+        Width = 177
+        Height = 21
+        TabOrder = 1
+      end
+      object edtConsumerSecret: TEdit
+        Left = 186
+        Top = 85
+        Width = 177
+        Height = 21
+        TabOrder = 2
       end
     end
   end
